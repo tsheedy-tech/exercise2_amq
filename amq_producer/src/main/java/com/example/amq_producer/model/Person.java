@@ -1,4 +1,4 @@
-package com.example.exercise2_amq.model;
+package com.example.amq_producer.model;
 
 import lombok.Data;
 

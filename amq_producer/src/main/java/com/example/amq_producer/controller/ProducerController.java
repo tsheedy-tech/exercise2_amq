@@ -1,9 +1,11 @@
-package com.example.exercise2_amq.controller;
+package com.example.amq_producer.controller;
 
-import com.example.exercise2_amq.model.Person;
-import com.example.exercise2_amq.model.Response;
+import com.example.amq_producer.model.Person;
+import com.example.amq_producer.model.Response;
 import org.apache.camel.ProducerTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProducerController {
