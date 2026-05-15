@@ -10,11 +10,11 @@ public class ConsumerRoute extends RouteBuilder{
 
     @Override
     public void configure() {
-        from("jms:queue:person")
+        from(":queue:person")
                 .routeId("consumer-route")
                 .process(exchange -> {
-                    Person person = exchange.getIn().getBody(Person.class);
-                    exchange.getIn().setBody(new Response(person.getName()));
+                    Person person = exchange.getMessage().getBody(Person.class);
+                    exchange.getMessage().setBody(new Response(person.getName()));
                 })
                 .log("Log: ${body.hello}");
     }

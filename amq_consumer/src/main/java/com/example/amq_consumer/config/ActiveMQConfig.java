@@ -1,9 +1,8 @@
-package com.example.amq_producer.config;
+package com.example.amq_consumer.config;
 
 
 import jakarta.jms.ConnectionFactory;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.camel.component.jms.JmsComponent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +28,10 @@ public class ActiveMQConfig {
         factory.setUserName(username);
         factory.setPassword(password);
 
-        factory.setTrustedPackages(List.of("com.example.amq_producer.model"));
+        factory.setTrustedPackages(List.of("com.example.exercise2_amq.model"));
 
         return factory;
     }
 
-    @Bean(name = "jms")
-    JmsComponent jmsComponent(ConnectionFactory connectionFactory) {
-        return JmsComponent.jmsComponentAutoAcknowledge(connectionFactory);
-    }
 
 }

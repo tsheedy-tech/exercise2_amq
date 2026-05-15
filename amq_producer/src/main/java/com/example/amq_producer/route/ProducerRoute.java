@@ -1,8 +1,8 @@
 package com.example.amq_producer.route;
 
-import com.example.amq_producer.model.Person;
-import com.example.amq_producer.model.Response;
+
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,10 +12,7 @@ public class ProducerRoute extends RouteBuilder{
     public void configure() {
         from("direct:hello")
                 .routeId("producer-route")
-                .process(exchange -> {
-                    Person person = exchange.getIn().getBody(Person.class);
-                    exchange.getIn().setBody(new Response(person.getName()));
-                })
+                .marshal().json(JsonLibrary.Jackson)
                 .to("jms:queue:person");
     }
 }
