@@ -6,16 +6,18 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AMQController {
+public class ProducerController {
 
     private final ProducerTemplate producerTemplate;
 
-    public AMQController(ProducerTemplate producerTemplate) {
+    public ProducerController(ProducerTemplate producerTemplate) {
         this.producerTemplate = producerTemplate;
     }
 
     @PostMapping(path = "/api/hello")
     public Response hello(@RequestBody Person person) {
-        return producerTemplate.requestBody("direct:hello", person, Response.class);
+        producerTemplate.sendBody("direct:hello", person);
+
+        return new Response(person.getName());
     }
 }
